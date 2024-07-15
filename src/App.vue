@@ -4,7 +4,7 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <!-- <el-button type="primary">按钮</el-button> -->
+  <el-button type="primary">按钮</el-button>
 </template>
 
 <style scoped>
