@@ -5,9 +5,14 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <el-button type="primary">按钮</el-button>
   <RouterView></RouterView>
+  <div class="text">lianxi</div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+.text {
+  color: $priceColor;
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
