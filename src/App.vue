@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
   <el-button type="primary">按钮</el-button>
+  <RouterView></RouterView>
 </template>
 
 <style scoped>
