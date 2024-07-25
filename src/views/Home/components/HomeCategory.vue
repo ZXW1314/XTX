@@ -43,13 +43,14 @@ onUpdated(() => console.log(categoryStore.categoryList));
 <style scoped lang="scss">
 .container {
   position: relative;
+  z-index: 1;
 }
 
 .category {
+  position: absolute;
   width: 250px;
   background: rgba(0, 0, 0, 0.8);
   padding-bottom: 5px;
-  z-index: 1;
 
   .category-one {
     height: 55px;
@@ -89,7 +90,6 @@ h4 {
   width: 990px;
   height: 500px;
   padding-left: 15px;
-  background-color: #f5f5f5;
 
   span {
     height: 80px;
