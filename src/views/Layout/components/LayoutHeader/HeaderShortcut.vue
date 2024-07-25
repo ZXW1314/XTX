@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import { useCategoryStore } from "@/stores/category.js";
+
+//获取header商品分类
+const categoryStore = useCategoryStore();
+</script>
+
+<template>
+  <div class="shortcut">
+    <ul>
+      <li><a href="#">首页</a></li>
+      <li v-for="item in categoryStore.categoryList" :key="item.id">
+        <a href="#">{{ item.name }}</a>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<style scoped lang="scss">
+//导航栏
+ul {
+  float: left;
+  margin-left: 40px;
+  font-size: 16px;
+}
+
+ul li {
+  float: left;
+  width: 78px;
+  height: 132px;
+  line-height: 132px;
+  font-size: 16px;
+  color: #121426;
+}
+
+ul a:hover {
+  color: $xtxColor;
+  padding-bottom: 5px;
+  border-bottom: 1px solid $xtxColor;
+}
+</style>

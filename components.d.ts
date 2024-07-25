@@ -8,6 +8,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
+    FooterCopyright: typeof import('./src/components/LayoutFooter/FooterCopyright.vue')['default']
+    FooterService: typeof import('./src/components/LayoutFooter/FooterService.vue')['default']
+    HeaderShortcut: typeof import('./src/components/LayoutHeader/HeaderShortcut.vue')['default']
+    HeaderShortcutTop: typeof import('./src/components/LayoutHeader/HeaderShortcutTop.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
     IconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']

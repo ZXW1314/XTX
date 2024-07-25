@@ -1,26 +1,25 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HeaderShortcut from "@/views/Layout/components/LayoutHeader/HeaderShortcut.vue";
+import HeaderShortcutTop from "@/views/Layout/components/LayoutHeader/HeaderShortcutTop.vue";
+
+import { ref } from "vue";
+
+//吸顶导航
+const HeaderTop = ref<number>(0);
+window.addEventListener("scroll", function () {
+  HeaderTop.value = document.documentElement.scrollTop;
+});
+</script>
 
 <template>
   <header>
+    <HeaderShortcutTop :class="{ show: HeaderTop > 78 }"></HeaderShortcutTop>
     <div class="container">
       <div class="logo">
         <a href="#"></a>
       </div>
 
-      <div class="shortcut">
-        <ul>
-          <li><a href="#">首页</a></li>
-          <li><a href="#">居家</a></li>
-          <li><a href="#">美食</a></li>
-          <li><a href="#">服饰</a></li>
-          <li><a href="#">母婴</a></li>
-          <li><a href="#">个护</a></li>
-          <li><a href="#">严选</a></li>
-          <li><a href="#">数码</a></li>
-          <li><a href="#">运动</a></li>
-          <li><a href="#">杂项</a></li>
-        </ul>
-      </div>
+      <HeaderShortcut></HeaderShortcut>
 
       <div class="search">
         <i class="iconfont icon-sousuokuang"></i>
@@ -42,29 +41,14 @@ header {
 // logo
 .logo {
   float: left;
+  width: 200px;
 }
 
 .logo a {
   display: block;
-  width: 200px;
+  width: 100%;
   height: 132px;
   background: url("@/assets/images/logo.png") no-repeat center 18px / contain;
-}
-
-//导航栏
-ul {
-  float: left;
-  margin-left: 40px;
-  font-size: 16px;
-}
-
-ul li {
-  float: left;
-  width: 78px;
-  height: 132px;
-  line-height: 132px;
-  font-size: 16px;
-  color: #121426;
 }
 
 // 搜索框和购物车
@@ -98,5 +82,10 @@ input {
 
 .shopping-cart i {
   font-size: 22px;
+}
+
+.show {
+  opacity: 1;
+  transition: all 0.3s linear;
 }
 </style>

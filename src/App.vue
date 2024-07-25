@@ -1,16 +1,9 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-
-import LayoutNav from '@/views/Layout/components/LayoutNav.vue'
-import LayoutHeader from '@/views/Layout/components/LayoutHeader.vue'
-import LayoutFooter from '@/views/Layout/components/LayoutFooter.vue'
+import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <LayoutNav></LayoutNav>
-  <LayoutHeader></LayoutHeader>
   <RouterView></RouterView>
-  <LayoutFooter></LayoutFooter>
 </template>
 
 <style scoped lang="scss"></style>
