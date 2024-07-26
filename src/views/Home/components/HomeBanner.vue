@@ -7,7 +7,6 @@ const bannerList = ref<any>([]);
 onMounted(async () => {
   const res = await getBannerAPI();
   bannerList.value = res.data.result;
-  console.log(bannerList.value);
 });
 </script>
 

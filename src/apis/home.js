@@ -13,3 +13,10 @@ export function getGoodsAPI() {
     url: "/home/new",
   });
 }
+
+//人气推荐
+export function getHotAPI() {
+  return http({
+    url: "/home/hot",
+  });
+}

@@ -1,4 +1,59 @@
 //热门推荐
-<script setup lang="ts"></script>
-<template>我是热门推荐</template>
-<style scoped lang="scss"></style>
+<script setup lang="ts">
+import GoodsHot from "./GoodsHot.vue";
+
+import { ref, onMounted } from "vue";
+import { getHotAPI } from "@/apis/home.js";
+
+//人气推荐
+const hotList = ref<any>([]);
+onMounted(async () => {
+  const res = await getHotAPI();
+  hotList.value = res.data.result;
+});
+</script>
+
+<template>
+  <GoodsHot class="goods-hot" title="人气推荐" subTitle="人气爆款 不容错过">
+    <ul>
+      <li v-for="item in hotList" :key="item.id">
+        <img v-img-lazy="item.picture" alt="" />
+        <p class="title ellipsis">{{ item.title }}</p>
+        <p class="alt">{{ item.alt }}</p>
+      </li>
+    </ul>
+  </GoodsHot>
+</template>
+
+<style scoped lang="scss">
+ul {
+  display: flex;
+  justify-content: space-between;
+
+  li {
+    width: 306px;
+    height: 406px;
+    background: #f0f9f4;
+    transition: all 0.5s;
+
+    &:hover {
+      transform: translate3d(0, -3px, 0);
+      box-shadow: 0 3px 8px rgb(0 0 0 / 0.2);
+    }
+
+    p {
+      padding-top: 12px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 22px;
+    }
+
+    .alt {
+      font-size: 18px;
+      color: #999;
+    }
+  }
+}
+</style>
