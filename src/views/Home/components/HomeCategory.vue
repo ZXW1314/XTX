@@ -1,9 +1,7 @@
 //轮播图前的分类页
 <script setup lang="ts">
 import { useCategoryStore } from "@/stores/category.js";
-import { onUpdated } from "vue";
 const categoryStore = useCategoryStore();
-onUpdated(() => console.log(categoryStore.categoryList));
 </script>
 
 <template>

@@ -20,3 +20,21 @@ export function getHotAPI() {
     url: "/home/hot",
   });
 }
+
+//首页商品
+export function getGoods() {
+  return http({
+    url: "/home/goods",
+  });
+}
+
+//二级列表
+export function getCategorySecond(id) {
+  return http({
+    url: "/category",
+    methods: "get",
+    params: {
+      id,
+    },
+  });
+}

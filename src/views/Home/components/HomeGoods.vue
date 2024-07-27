@@ -1,54 +1,137 @@
-//新鲜好物
+//商品
 <script setup lang="ts">
-import GoodsHot from "./GoodsHot.vue";
-
+import { getGoods } from "@/apis/home.js";
 import { ref, onMounted } from "vue";
-import { getGoodsAPI } from "@/apis/home.js";
 
-const goodsList = ref<any>([]);
+const goodsList = ref();
 onMounted(async () => {
-  const res = await getGoodsAPI();
+  const res = await getGoods();
   goodsList.value = res.data.result;
 });
 </script>
 
 <template>
-  <GoodsHot class="goods-hot" title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
-    <ul>
+  <div style="background-color: #fff">
+    <ul class="container">
       <li v-for="item in goodsList" :key="item.id">
-        <img :src="item.picture" alt="" />
-        <p class="name ellipsis">{{ item.name }}</p>
-        <p class="price"><i>¥</i>{{ item.price }}</p>
+        <h3>{{ item.name }}</h3>
+        <div class="clearfix">
+          <div class="img-large">
+            <img v-img-lazy="item.picture" alt="" />
+            <div>
+              <i>{{ item.name }}馆</i>
+              <i>{{ item.saleInfo }}</i>
+            </div>
+          </div>
+          <div class="good clearfix">
+            <ul>
+              <li v-for="i in item.goods" :key="i.id">
+                <img v-img-lazy="i.picture" alt="" />
+                <p class="name ellipsis">{{ i.name }}</p>
+                <p class="desc ellipsis">{{ i.desc }}</p>
+                <p class="price"><i>¥</i>{{ i.price }}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
       </li>
     </ul>
-  </GoodsHot>
+  </div>
+  <span></span>
 </template>
 
 <style scoped lang="scss">
-ul {
-  display: flex;
-  justify-content: space-between;
+h3 {
+  height: 115px;
+  line-height: 115px;
+  font-size: 32px;
+  font-weight: 400;
+}
 
-  li {
-    width: 306px;
-    height: 406px;
-    background: #f0f9f4;
-    transition: all 0.5s;
+.img-large {
+  position: relative;
+  float: left;
+  width: 240px;
+  height: 610px;
+  margin-right: 10px;
+  vertical-align: auto;
 
-    &:hover {
-      transform: translate3d(0, -3px, 0);
-      box-shadow: 0 3px 8px rgb(0 0 0 / 0.2);
+  div {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 66px;
+    line-height: 66px;
+    color: #fff;
+    font-size: 18px;
+    z-index: 2;
+
+    i {
+      padding: 20px 5px;
+      background: rgba(0, 0, 0);
     }
 
-    p {
-      padding-top: 12px;
-      font-size: 22px;
-      text-align: center;
-    }
-
-    .price {
-      color: $priceColor;
+    i:nth-child(2) {
+      background: rgba(0, 0, 0, 0.7);
     }
   }
+
+  img {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+}
+
+.good {
+  float: left;
+
+  ul {
+    width: 990px;
+    height: 610px;
+
+    li {
+      float: left;
+      width: 240px;
+      height: 300px;
+      margin: 0 10px 10px 0;
+      padding: 20px 30px;
+      transition: all 0.5s;
+      border-radius: 4px;
+
+      &:hover {
+        transform: translate3d(0, -3px, 0);
+        box-shadow: 0 3px 8px rgb(0 0 0 / 0.2);
+      }
+    }
+
+    li:nth-child(4n + 4) {
+      margin-right: 0;
+    }
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .name {
+    font-size: 16px;
+  }
+
+  .desc {
+    color: #999;
+    height: 29px;
+  }
+
+  .price {
+    color: $priceColor;
+    font-size: 20px;
+  }
+}
+
+span {
+  display: block;
+  height: 10px;
 }
 </style>

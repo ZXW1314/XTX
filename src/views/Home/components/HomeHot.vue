@@ -1,6 +1,6 @@
 //热门推荐
 <script setup lang="ts">
-import GoodsHot from "./GoodsHot.vue";
+import NewHot from "./NewHot.vue";
 
 import { ref, onMounted } from "vue";
 import { getHotAPI } from "@/apis/home.js";
@@ -14,7 +14,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <GoodsHot class="goods-hot" title="人气推荐" subTitle="人气爆款 不容错过">
+  <NewHot title="人气推荐" subTitle="人气爆款 不容错过">
     <ul>
       <li v-for="item in hotList" :key="item.id">
         <img v-img-lazy="item.picture" alt="" />
@@ -22,7 +22,8 @@ onMounted(async () => {
         <p class="alt">{{ item.alt }}</p>
       </li>
     </ul>
-  </GoodsHot>
+  </NewHot>
+  <span></span>
 </template>
 
 <style scoped lang="scss">
@@ -55,5 +56,10 @@ ul {
       color: #999;
     }
   }
+}
+
+span {
+  display: block;
+  height: 20px;
 }
 </style>

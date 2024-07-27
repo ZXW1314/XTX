@@ -2,21 +2,16 @@
 <script setup lang="ts">
 import HomeCategory from "./components/HomeCategory.vue";
 import HomeBanner from "./components/HomeBanner.vue";
-import HomeGoods from "./components/HomeGoods.vue";
+import HomeNew from "./components/HomeNew.vue";
 import HomeHot from "./components/HomeHot.vue";
-import HomeLive from "./components/HomeLive.vue";
-import HomeClothes from "./components/HomeClothes.vue";
-import HomeMotherChild from "./components/HomeMotherChild.vue";
+import HomeGoods from "./components/HomeGoods.vue";
 </script>
 <template>
   <HomeCategory></HomeCategory>
   <HomeBanner></HomeBanner>
-  <HomeGoods> </HomeGoods>
+  <HomeNew> </HomeNew>
   <HomeHot></HomeHot>
-  <HomeLive></HomeLive>
-  <HomeFood></HomeFood>
-  <HomeClothes></HomeClothes>
-  <HomeMotherChild></HomeMotherChild>
+  <HomeGoods></HomeGoods>
 </template>
 
 <style scoped lang="scss"></style>
