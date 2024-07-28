@@ -1,9 +1,12 @@
 import http from "@/utils/http.js";
 
 //banner轮播图
-export function getBannerAPI() {
+export function getBannerAPI(distributionSite = "1") {
   return http({
     url: "/home/banner",
+    params: {
+      distributionSite,
+    },
   });
 }
 
@@ -25,16 +28,5 @@ export function getHotAPI() {
 export function getGoods() {
   return http({
     url: "/home/goods",
-  });
-}
-
-//二级列表
-export function getCategorySecond(id) {
-  return http({
-    url: "/category",
-    methods: "get",
-    params: {
-      id,
-    },
   });
 }

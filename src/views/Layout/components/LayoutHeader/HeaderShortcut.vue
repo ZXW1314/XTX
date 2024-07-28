@@ -10,7 +10,9 @@ const categoryStore = useCategoryStore();
     <ul>
       <li><a href="#">首页</a></li>
       <li v-for="item in categoryStore.categoryList" :key="item.id">
-        <a href="#">{{ item.name }}</a>
+        <RouterLink active-class="active" :to="`/category/${item.id}`">{{
+          item.name
+        }}</RouterLink>
       </li>
     </ul>
   </div>
@@ -34,6 +36,12 @@ ul li {
 }
 
 ul a:hover {
+  color: $xtxColor;
+  padding-bottom: 5px;
+  border-bottom: 1px solid $xtxColor;
+}
+
+.active {
   color: $xtxColor;
   padding-bottom: 5px;
   border-bottom: 1px solid $xtxColor;
