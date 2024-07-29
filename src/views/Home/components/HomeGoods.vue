@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import { getGoods } from "@/apis/home.js";
 import { ref, onMounted } from "vue";
+import GoodsItem from "@/components/GoodsItem.vue";
 
 const goodsList = ref();
 onMounted(async () => {
@@ -26,10 +27,7 @@ onMounted(async () => {
           <div class="good clearfix">
             <ul>
               <li v-for="i in item.goods" :key="i.id">
-                <img v-img-lazy="i.picture" alt="" />
-                <p class="name ellipsis">{{ i.name }}</p>
-                <p class="desc ellipsis">{{ i.desc }}</p>
-                <p class="price"><i>¥</i>{{ i.price }}</p>
+                <GoodsItem :good="i"></GoodsItem>
               </li>
             </ul>
           </div>
@@ -94,39 +92,12 @@ h3 {
     li {
       float: left;
       width: 240px;
-      height: 300px;
       margin: 0 10px 10px 0;
-      padding: 20px 30px;
-      transition: all 0.5s;
-      border-radius: 4px;
-
-      &:hover {
-        transform: translate3d(0, -3px, 0);
-        box-shadow: 0 3px 8px rgb(0 0 0 / 0.2);
-      }
     }
 
     li:nth-child(4n + 4) {
       margin-right: 0;
     }
-  }
-
-  p {
-    text-align: center;
-  }
-
-  .name {
-    font-size: 16px;
-  }
-
-  .desc {
-    color: #999;
-    height: 29px;
-  }
-
-  .price {
-    color: $priceColor;
-    font-size: 20px;
   }
 }
 

@@ -8,7 +8,7 @@ const categoryStore = useCategoryStore();
 <template>
   <div class="shortcut">
     <ul>
-      <li><a href="#">首页</a></li>
+      <li><RouterLink to="/">首页</RouterLink></li>
       <li v-for="item in categoryStore.categoryList" :key="item.id">
         <RouterLink active-class="active" :to="`/category/${item.id}`">{{
           item.name

@@ -16,7 +16,7 @@ onMounted(async () => {
   <NewHot class="goods-hot" title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
     <ul>
       <li v-for="item in goodsList" :key="item.id">
-        <img :src="item.picture" alt="" />
+        <img v-img-lazy="item.picture" alt="" />
         <p class="name ellipsis">{{ item.name }}</p>
         <p class="price"><i>¥</i>{{ item.price }}</p>
       </li>

@@ -5,6 +5,7 @@ import { onMounted, ref } from "vue";
 import { getCategorySecondAPI } from "@/apis/category.js";
 import { onBeforeRouteUpdate, useRoute } from "vue-router";
 import { getBannerAPI } from "@/apis/home.js";
+import GoodsItem from "@/components/GoodsItem.vue";
 
 //获取分类数据
 const categoryData = ref<any>({});
@@ -12,7 +13,6 @@ const route = useRoute();
 const getCategory = async (id = route.params.id) => {
   const res = await getCategorySecondAPI(id);
   categoryData.value = res.data.result;
-  console.log(categoryData.value);
 };
 onBeforeRouteUpdate((to) => {
   getCategory(to.params.id);
@@ -24,7 +24,6 @@ const bannerList = ref<any>([]);
 onMounted(async () => {
   const res = await getBannerAPI("2");
   bannerList.value = res.data.result;
-  console.log(bannerList.value);
 });
 </script>
 
@@ -46,22 +45,30 @@ onMounted(async () => {
         </el-carousel-item>
       </el-carousel>
     </div>
+
     <!-- 商品 -->
     <div class="all-category">
       <h3>全部分类</h3>
       <ul class="clearfix">
         <li v-for="item in categoryData.children" :key="item.id">
-          <img v-img-lazy="item.picture" alt="" />
-          <p>{{ item.name }}</p>
+          <RouterLink :to="`/category/sub/${item.id}`">
+            <img v-img-lazy="item.picture" alt="" />
+            <p>{{ item.name }}</p>
+          </RouterLink>
         </li>
       </ul>
     </div>
+    <ul class="category">
+      <li class="large" v-for="item in categoryData.children" :key="item.id">
+        <h3>-{{ item.name }}-</h3>
+        <ul class="good">
+          <li v-for="i in item.goods" :key="i.id">
+            <GoodsItem :good="i"></GoodsItem>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
-  <ul class="category">
-    <li v-for="item in categoryData.children" :key="item.id">
-      <h3>-{{ item.name }}-</h3>
-    </li>
-  </ul>
 </template>
 
 <style scoped lang="scss">
@@ -112,10 +119,16 @@ h3 {
 }
 
 .category {
-  li {
+  .large {
     margin-bottom: 20px;
     background-color: #fff;
-    padding: 0 40px 30px 40px;
+  }
+
+  .good {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0 40px 30px;
   }
 }
 </style>

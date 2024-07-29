@@ -12,8 +12,11 @@ declare module 'vue' {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
     ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
+    ElTabPane: typeof import('element-plus/es')['ElTabPane']
+    ElTabs: typeof import('element-plus/es')['ElTabs']
     FooterCopyright: typeof import('./src/components/LayoutFooter/FooterCopyright.vue')['default']
     FooterService: typeof import('./src/components/LayoutFooter/FooterService.vue')['default']
+    GoodsItem: typeof import('./src/components/GoodsItem.vue')['default']
     HeaderShortcut: typeof import('./src/components/LayoutHeader/HeaderShortcut.vue')['default']
     HeaderShortcutTop: typeof import('./src/components/LayoutHeader/HeaderShortcutTop.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
@@ -26,5 +29,8 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
     WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
   }
 }
