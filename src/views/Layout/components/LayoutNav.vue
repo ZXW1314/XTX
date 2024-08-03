@@ -1,11 +1,12 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <nav class="nav">
     <div class="container">
       <ul>
-        <li><a href="#" @click="$router.push('/login')">请先登录</a></li>
+        <li>
+          <RouterLink to="/login">请先登录</RouterLink>
+        </li>
         <li></li>
         <li><a href="#">帮助中心</a></li>
         <li></li>
@@ -16,33 +17,33 @@
 </template>
 
 <style scoped lang="scss">
-  .nav{
-    height: 52px;
-    background-color: #333333;
-  }
+.nav {
+  height: 52px;
+  background-color: #333333;
+}
 
-  ul{
-    float: right
-  }
+ul {
+  float: right;
+}
 
-  li{
-    float: left;
-  }
+li {
+  float: left;
+}
 
-  li:nth-child(even){
-    height: 16px;
-    margin: 18px 16px;
-    border-left: 1px solid #666;
-  }
+li:nth-child(even) {
+  height: 16px;
+  margin: 18px 16px;
+  border-left: 1px solid #666;
+}
 
-  a{
-    height: 52px;
-    line-height: 52px;
-    font-size: 14px;
-    color: #cdcdcd;
-  }
+a {
+  height: 52px;
+  line-height: 52px;
+  font-size: 14px;
+  color: #cdcdcd;
+}
 
-  a:hover{
-    color: $xtxColor;
-  }
+a:hover {
+  color: $xtxColor;
+}
 </style>

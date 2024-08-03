@@ -10,10 +10,12 @@ defineProps({
 
 <template>
   <div>
-    <img v-img-lazy="good.picture" alt="" />
-    <p class="name ellipsis">{{ good.name }}</p>
-    <p class="desc ellipsis">{{ good.desc }}</p>
-    <p class="price"><i>¥</i>{{ good.price }}</p>
+    <RouterLink :to="`/detail/${good.id}`">
+      <img v-img-lazy="good.picture" alt="" />
+      <p class="name ellipsis">{{ good.name }}</p>
+      <p class="desc ellipsis">{{ good.desc }}</p>
+      <p class="price"><i>¥</i>{{ good.price }}</p>
+    </RouterLink>
   </div>
 </template>
 

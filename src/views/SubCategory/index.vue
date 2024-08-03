@@ -4,7 +4,6 @@ import { useRoute } from "vue-router";
 import { getSubCategoryAPI, getSubGoodsAPI } from "@/apis/category.js";
 import { onMounted, ref } from "vue";
 import GoodsItem from "@/components/GoodsItem.vue";
-import type { TabsPaneContext } from "element-plus";
 
 //获取sub导航数据
 const route = useRoute();

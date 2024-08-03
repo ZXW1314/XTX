@@ -16,9 +16,11 @@ onMounted(async () => {
   <NewHot class="goods-hot" title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
     <ul>
       <li v-for="item in goodsList" :key="item.id">
-        <img v-img-lazy="item.picture" alt="" />
-        <p class="name ellipsis">{{ item.name }}</p>
-        <p class="price"><i>¥</i>{{ item.price }}</p>
+        <RouterLink :to="`/detail/${item.id}`">
+          <img v-img-lazy="item.picture" alt="" />
+          <p class="name ellipsis">{{ item.name }}</p>
+          <p class="price"><i>¥</i>{{ item.price }}</p>
+        </RouterLink>
       </li>
     </ul>
   </NewHot>
