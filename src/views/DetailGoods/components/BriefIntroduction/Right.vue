@@ -5,8 +5,9 @@ import { ref, watch } from "vue";
 import { getPathMap } from "./Right/getPathMap";
 import { updateOptional } from "./Right/updateOptional";
 import { initOptional } from "./Right/initOptional";
-import GoodsItem from "@/components/GoodsItem.vue";
 import { getSelectValues } from "./Right/getSelectValues";
+import { ElMessage } from "element-plus";
+import { useCartStore } from "@/stores/cart.js";
 
 const props = defineProps({
   goodData: {
@@ -15,8 +16,14 @@ const props = defineProps({
   },
 });
 
+const cartStore = useCartStore();
+
 //商品数量
 const countGood = ref(1);
+const removeGood = () => {
+  if (countGood.value <= 0) return;
+  countGood.value--;
+};
 
 let goodMap: any;
 watch(
@@ -24,6 +31,7 @@ watch(
   (newValue) => {
     //生成有效商品对象
     goodMap = getPathMap(newValue.skus);
+    console.log(goodMap);
     //初始有效属性
     initOptional(goodMap, newValue.specs);
   },
@@ -43,10 +51,45 @@ const changeSelect = (item: any, i: any) => {
     i.selected = true;
   }
   updateOptional(props.goodData.specs, goodMap);
+};
 
+//添加商品到购物车
+const addGoodCart = () => {
   //是否属性全选择了
   const selecedValues = getSelectValues(props.goodData.specs);
   const index = selecedValues.findIndex((item: any) => item === undefined);
+  if (index != -1) {
+    ElMessage.warning("请选择商品规格");
+    return;
+  }
+
+  if (countGood.value === 0) {
+    ElMessage.warning("商品数量不能为0");
+    return;
+  }
+
+  //商品数量不能超过已有商品数量
+  console.log(goodMap[selecedValues.join("-")][0], props.goodData.skus);
+  const sku = props.goodData.skus.find(
+    (item: any) => item.id === goodMap[selecedValues.join("-")][0]
+  );
+  if (countGood.value > sku.inventory) {
+    ElMessage.warning(`商品数量仅剩${sku.inventory}`);
+    return;
+  }
+
+  cartStore.addCart({
+    id: props.goodData.id,
+    name: props.goodData.name,
+    mainPicture: props.goodData.mainPictures[0],
+    price: props.goodData.price,
+    count: countGood.value,
+    skuId: sku.id,
+    skuSpecs: sku.specs,
+    selected: true,
+  });
+
+  console.log(cartStore.cartList);
 };
 </script>
 <template>
@@ -89,12 +132,17 @@ const changeSelect = (item: any, i: any) => {
         </li>
       </ul>
     </div>
-    <div class="count-good">
-      <button>-</button>
-      <input type="text" :value="countGood" />
-      <button>+</button>
+    <div class="count-good clearfix">
+      <button
+        :class="{ 'remove-optional': countGood <= 0 }"
+        @click="removeGood"
+      >
+        -
+      </button>
+      <p>{{ countGood }}</p>
+      <button @click="countGood++">+</button>
     </div>
-    <div class="add-cart">加入购物车</div>
+    <div class="add-cart" @click="addGoodCart">加入购物车</div>
   </div>
 </template>
 
@@ -221,15 +269,24 @@ const changeSelect = (item: any, i: any) => {
   .count-good {
     margin-top: 20px;
 
+    .remove-optional {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     button {
+      float: left;
       width: 32px;
       height: 30px;
+      font-size: 20px;
       background-color: #f5f5f5;
       border: 1px solid #e4e4e4;
     }
 
-    input {
+    p {
+      float: left;
       height: 30px;
+      line-height: 30px;
       width: 90px;
       padding: 0 10px;
       text-align: center;

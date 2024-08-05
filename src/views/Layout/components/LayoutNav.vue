@@ -4,7 +4,6 @@ import router from "@/router";
 import { useUserStore } from "@/stores/user.js";
 
 const userStore = useUserStore();
-console.log(userStore.userInfo);
 
 const confirmEvent = () => {
   userStore.clearUserInfo();
