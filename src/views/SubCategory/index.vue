@@ -24,7 +24,6 @@ const goodsList = ref<any>({});
 const getGoodsList = async () => {
   const res = await getSubGoodsAPI(dataParam.value);
   goodsList.value = res.data.result.items;
-  console.log(goodsList.value);
 };
 onMounted(() => getGoodsList());
 

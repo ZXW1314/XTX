@@ -15,7 +15,6 @@ const route = useRoute();
 onBeforeMount(async () => {
   const res = await getGoodDetailAPI(route.params.id);
   goodData.value = res.data.result;
-  console.log(goodData.value);
 });
 </script>
 

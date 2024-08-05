@@ -1,5 +1,9 @@
 // axios基础的封装
 import axios from "axios";
+import "element-plus/es/components/message/style/css";
+import { ElMessage } from "element-plus";
+import { useUserStore } from "@/stores/user.js";
+import router from "@/router";
 
 const http = axios.create({
   baseURL: "http://pcapi-xiaotuxian-front-devtest.itheima.net",
@@ -11,6 +15,9 @@ const http = axios.create({
 http.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
+    const userStore = useUserStore();
+    const token = userStore.userInfo.token;
+    if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   function (error) {
@@ -27,6 +34,17 @@ http.interceptors.response.use(
   },
   function (error) {
     // 对响应错误做点什么
+    ElMessage({
+      message: error.response.data.message,
+      type: "warning",
+    });
+
+    //401状态
+    if (error.response.status === 401) {
+      const userStore = useUserStore();
+      userStore.clearUserInfo();
+      router.push({ path: "/login" });
+    }
     return Promise.reject(error);
   }
 );

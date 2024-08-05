@@ -86,6 +86,7 @@ input {
 
 .show {
   opacity: 1;
-  transition: all 0.3s linear;
+  transition: all 0.4s linear;
+  z-index: 3;
 }
 </style>

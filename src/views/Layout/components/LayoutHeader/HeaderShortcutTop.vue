@@ -35,11 +35,11 @@ const categoryStore = useCategoryStore();
   height: 80px;
   width: 100%;
   border-bottom: 1px solid #e4e4e4;
-  opacity: 0;
+  opacity: 1;
   left: 0;
   top: 0;
-  z-index: 999;
   background-color: #fff;
+  z-index: -1;
 }
 // logo
 .logo {
