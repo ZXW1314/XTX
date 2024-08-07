@@ -31,7 +31,6 @@ watch(
   (newValue) => {
     //生成有效商品对象
     goodMap = getPathMap(newValue.skus);
-    console.log(goodMap);
     //初始有效属性
     initOptional(goodMap, newValue.specs);
   },
@@ -69,7 +68,6 @@ const addGoodCart = () => {
   }
 
   //商品数量不能超过已有商品数量
-  console.log(goodMap[selecedValues.join("-")][0], props.goodData.skus);
   const sku = props.goodData.skus.find(
     (item: any) => item.id === goodMap[selecedValues.join("-")][0]
   );
@@ -78,18 +76,20 @@ const addGoodCart = () => {
     return;
   }
 
+  const attrsArray = sku.specs.map((item: any) =>
+    Object.values(item).join(":")
+  );
+  const attrsText = attrsArray.join(" ");
   cartStore.addCart({
     id: props.goodData.id,
     name: props.goodData.name,
     mainPicture: props.goodData.mainPictures[0],
-    price: props.goodData.price,
+    price: +props.goodData.price,
     count: countGood.value,
     skuId: sku.id,
-    skuSpecs: sku.specs,
+    attrsText: attrsText,
     selected: true,
   });
-
-  console.log(cartStore.cartList);
 };
 </script>
 <template>

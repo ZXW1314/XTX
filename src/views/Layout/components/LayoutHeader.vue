@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import HeaderShortcut from "@/views/Layout/components/LayoutHeader/HeaderShortcut.vue";
 import HeaderShortcutTop from "@/views/Layout/components/LayoutHeader/HeaderShortcutTop.vue";
-
+import HeaderCart from "@/views/Layout/components/LayoutHeader/HeaderCart.vue";
 import { ref } from "vue";
+import { useCartStore } from "@/stores/cart.js";
+
+const cartStore = useCartStore();
 
 //吸顶导航
 const HeaderTop = ref<number>(0);
@@ -26,7 +29,9 @@ window.addEventListener("scroll", function () {
         <input type="text" placeholder="搜一搜" />
       </div>
       <div class="shopping-cart">
-        <i class="iconfont icon-gouwuchekong"></i>
+        <i class="iconfont icon-gouwuchekong"> </i>
+        <span>{{ cartStore.countGood }}</span>
+        <HeaderCart class="cart-list"></HeaderCart>
       </div>
     </div>
   </header>
@@ -73,11 +78,38 @@ input {
 }
 
 .shopping-cart {
+  position: relative;
   float: right;
-  width: 50px;
-  height: 132px;
-  line-height: 132px;
-  text-align: center;
+  margin: 50px 0;
+
+  &:hover {
+    .cart-list {
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+
+  .cart-list {
+    opacity: 0;
+  }
+
+  i {
+    display: block;
+    width: 50px;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  span {
+    position: absolute;
+    left: 30px;
+    top: -5px;
+    padding: 0 8px;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 8px;
+    background-color: #e26237;
+  }
 }
 
 .shopping-cart i {

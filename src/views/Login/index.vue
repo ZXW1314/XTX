@@ -6,8 +6,10 @@ import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
 import { useUserStore } from "@/stores/user.js";
 import router from "@/router";
+import { useCartStore } from "@/stores/cart.js";
 
 const userStore = useUserStore();
+const cartStore = useCartStore();
 
 interface RuleForm {
   name: string;
@@ -45,10 +47,12 @@ const rules = reactive<FormRules<RuleForm>>({
 
 //点击登录
 const submitForm = async (formEl: FormInstance | undefined) => {
+  console.log(3, cartStore.cartList);
   if (!formEl) return;
   await formEl.validate(async (valid) => {
     if (valid) {
       await userStore.getUserInfo(ruleForm.name, ruleForm.password);
+      console.log(3, cartStore.cartList);
       router.replace({ path: "/" });
       ElMessage({
         message: "登录成功",

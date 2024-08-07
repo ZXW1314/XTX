@@ -2,11 +2,14 @@
 <script setup lang="ts">
 import router from "@/router";
 import { useUserStore } from "@/stores/user.js";
+import { useCartStore } from "@/stores/cart.js";
 
 const userStore = useUserStore();
+const cartStore = useCartStore();
 
 const confirmEvent = () => {
   userStore.clearUserInfo();
+  cartStore.clearCartList();
   router.replace({ path: "/login" });
 };
 </script>
@@ -14,7 +17,7 @@ const confirmEvent = () => {
 <template>
   <div class="nav">
     <div class="container">
-      <template v-if="userStore.userInfo.token">
+      <template v-if="userStore.userInfo?.token">
         <ul>
           <li>
             <RouterLink to="/">
